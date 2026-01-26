@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/store/store";
+import { AppDispatch } from "@/store";
 import { createChallenge } from "@/store/challengesSlice";
 import { UnknownAction } from "redux";
 

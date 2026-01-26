@@ -7,6 +7,7 @@ import Section5 from "./Section5";
 import Section6 from "./Section6";
 import Section7 from "./Section7";
 import Section9 from "./Section9";
+import ContactSection from "./ContactSection";
 
 export default function HomeLand() {
   return (
@@ -20,6 +21,7 @@ export default function HomeLand() {
         <Section6 />
         <Section7 />
         <Section9 />
+        <ContactSection />
       </MainLayout>
     </div>
   );

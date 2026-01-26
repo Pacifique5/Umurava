@@ -3,21 +3,23 @@
 import Image from "next/image";
 import logo2 from "../../../../public/logo_2.png";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn, UserPlus } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const navLinks = [
   { name: "Home", linkTo: "/" },
   { name: "Challenge & Hackathons", linkTo: "/challenges" },
   { name: "For Learning Institutions", linkTo: "/institutions" },
   { name: "About Us", linkTo: "/about" },
-  { name: "Contact Us", linkTo: "/contact" }
+  { name: "Contact Us", linkTo: "#contact", isScroll: true }
 ];
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showAuthMenu, setShowAuthMenu] = useState(false);
   const pathname = usePathname();
+  const authMenuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -27,9 +29,43 @@ export default function Navbar() {
     setIsMenuOpen(false);
   };
 
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+    closeMenu();
+  };
+
+  const handleNavClick = (link: any, e: React.MouseEvent) => {
+    if (link.isScroll) {
+      handleContactClick(e);
+    } else {
+      closeMenu();
+    }
+  };
+
+  // Close auth menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (authMenuRef.current && !authMenuRef.current.contains(event.target as Node)) {
+        setShowAuthMenu(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
-      <div className="lg:px-16 flex fixed w-screen left-0 top-0 bg-white/50 backdrop-blur-lg justify-between items-center pr-6">
+      <div className="lg:px-16 flex fixed w-screen left-0 top-0 bg-white/50 backdrop-blur-lg justify-between items-center pr-6 z-40">
         <Link href={"/"}>
           <Image src={logo2} alt="Umurava logo" height={90} />
         </Link>
@@ -44,26 +80,58 @@ export default function Navbar() {
         {/* desktop navlinks */}
         <div className="hidden lg:flex gap-6">
           {navLinks.map((link, i) => (
-            <Link
-              key={i}
-              href={link.linkTo}
-              className={`hover:text-blue-light duration-300 ${
-                pathname === link.linkTo ? "text-blue-500" : ""
-              }`}
-            >
-              {link.name}
-            </Link>
+            link.isScroll ? (
+              <button
+                key={i}
+                onClick={handleContactClick}
+                className="hover:text-blue-light duration-300"
+              >
+                {link.name}
+              </button>
+            ) : (
+              <Link
+                key={i}
+                href={link.linkTo}
+                className={`hover:text-blue-light duration-300 ${
+                  pathname === link.linkTo ? "text-blue-500" : ""
+                }`}
+              >
+                {link.name}
+              </Link>
+            )
           ))}
         </div>
 
-        {/* desktop join btn */}
-        <div className="hidden lg:block">
-          <Link
-            href={""}
-            className="bg-blue-dark hover:bg-blue-light duration-500 px-2 py-3 rounded-md text-white"
+        {/* desktop auth menu */}
+        <div className="hidden lg:block relative" ref={authMenuRef}>
+          <button
+            onClick={() => setShowAuthMenu(!showAuthMenu)}
+            className="bg-blue-dark hover:bg-blue-light duration-500 px-4 py-3 rounded-md text-white flex items-center gap-2"
           >
+            <UserPlus size={18} />
             Join the Program
-          </Link>
+          </button>
+          
+          {showAuthMenu && (
+            <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50 border border-gray-200">
+              <Link
+                href="/login"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                onClick={() => setShowAuthMenu(false)}
+              >
+                <LogIn size={16} />
+                Login
+              </Link>
+              <Link
+                href="/signup"
+                className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+                onClick={() => setShowAuthMenu(false)}
+              >
+                <UserPlus size={16} />
+                Sign Up
+              </Link>
+            </div>
+          )}
         </div>
 
         {/* mobile menu */}
@@ -84,26 +152,47 @@ export default function Navbar() {
 
           {/* mobile links */}
           {navLinks.map((link, i) => (
-            <Link
-              key={i}
-              href={link.linkTo}
-              onClick={closeMenu}
-              className={`hover:text-blue-light duration-300 ${
-                pathname === link.linkTo ? "text-blue-500" : ""
-              }`}
-            >
-              {link.name}
-            </Link>
+            link.isScroll ? (
+              <button
+                key={i}
+                onClick={(e) => handleNavClick(link, e)}
+                className="hover:text-blue-light duration-300"
+              >
+                {link.name}
+              </button>
+            ) : (
+              <Link
+                key={i}
+                href={link.linkTo}
+                onClick={(e) => handleNavClick(link, e)}
+                className={`hover:text-blue-light duration-300 ${
+                  pathname === link.linkTo ? "text-blue-500" : ""
+                }`}
+              >
+                {link.name}
+              </Link>
+            )
           ))}
 
-          {/* mobile join btn */}
-          <Link
-            href={""}
-            onClick={closeMenu}
-            className="bg-blue-dark px-2 py-3 rounded-md text-white"
-          >
-            Join the Program
-          </Link>
+          {/* mobile auth buttons */}
+          <div className="flex flex-col gap-3 mt-6">
+            <Link
+              href="/login"
+              onClick={closeMenu}
+              className="bg-blue-light hover:bg-blue-dark px-6 py-3 rounded-md text-white flex items-center gap-2 justify-center transition-colors duration-200"
+            >
+              <LogIn size={18} />
+              Login
+            </Link>
+            <Link
+              href="/signup"
+              onClick={closeMenu}
+              className="bg-blue-dark hover:bg-blue-light px-6 py-3 rounded-md text-white flex items-center gap-2 justify-center transition-colors duration-200"
+            >
+              <UserPlus size={18} />
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
     </div>
