@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
@@ -11,10 +11,17 @@ import {
   Settings, 
   LogOut,
   User,
-  Bell
+  Bell,
+  ChevronDown,
+  Camera,
+  Lock,
+  Mail,
+  Edit
 } from "lucide-react";
 import { RootState, AppDispatch } from "@/store";
 import { logoutUser, initializeAuth } from "@/store/authSlice";
+import ProfileModal from "@/components/dashboard/ProfileModal";
+import ChangePasswordModal from "@/components/dashboard/ChangePasswordModal";
 
 export default function DashboardLayout({
   children,
@@ -24,6 +31,10 @@ export default function DashboardLayout({
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   const { user, isAuthenticated, loading } = useSelector((state: RootState) => state.auth);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] = useState(false);
 
   useEffect(() => {
     // Initialize auth state from localStorage
@@ -60,6 +71,49 @@ export default function DashboardLayout({
     { name: 'Community', href: '/dashboard/community', icon: Users },
   ];
 
+  const profileMenuItems = [
+    { 
+      name: 'View Profile', 
+      icon: User, 
+      action: () => {
+        setShowProfileModal(true);
+        setShowProfileMenu(false);
+      }
+    },
+    { 
+      name: 'Upload Photo', 
+      icon: Camera, 
+      action: () => {
+        console.log('Upload Photo');
+        setShowProfileMenu(false);
+      }
+    },
+    { 
+      name: 'Change Password', 
+      icon: Lock, 
+      action: () => {
+        setShowPasswordModal(true);
+        setShowProfileMenu(false);
+      }
+    },
+    { 
+      name: 'Update Email', 
+      icon: Mail, 
+      action: () => {
+        console.log('Update Email');
+        setShowProfileMenu(false);
+      }
+    },
+    { 
+      name: 'Account Settings', 
+      icon: Settings, 
+      action: () => {
+        console.log('Account Settings');
+        setShowProfileMenu(false);
+      }
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Sidebar */}
@@ -87,26 +141,49 @@ export default function DashboardLayout({
             </ul>
           </nav>
 
-          {/* User section */}
+          {/* User Profile Section */}
           <div className="border-t border-gray-200 p-6">
-            <div className="flex items-center gap-x-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-light text-white">
-                <User className="h-5 w-5" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">
-                  {user?.firstName} {user?.lastName}
-                </p>
-                <p className="text-xs text-gray-500 truncate">{user?.email}</p>
-              </div>
+            <div className="relative">
+              <button
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+                className="flex w-full items-center gap-x-3 rounded-md p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-light text-white font-semibold">
+                  {user?.firstName?.[0]}{user?.lastName?.[0]}
+                </div>
+                <div className="flex-1 min-w-0 text-left">
+                  <p className="text-sm font-medium text-gray-900 truncate">
+                    {user?.firstName} {user?.lastName}
+                  </p>
+                  <p className="text-xs text-gray-500 truncate">{user?.email}</p>
+                </div>
+                <ChevronDown className="h-4 w-4 text-gray-400" />
+              </button>
+
+              {/* Profile Dropdown */}
+              {showProfileMenu && (
+                <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
+                  {profileMenuItems.map((item) => (
+                    <button
+                      key={item.name}
+                      onClick={item.action}
+                      className="flex w-full items-center gap-x-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      <item.icon className="h-4 w-4 text-gray-400" />
+                      {item.name}
+                    </button>
+                  ))}
+                  <hr className="my-2 border-gray-200" />
+                  <button
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-x-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    Sign out
+                  </button>
+                </div>
+              )}
             </div>
-            <button
-              onClick={handleLogout}
-              className="mt-4 flex w-full items-center gap-x-3 rounded-md p-2 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
-            >
-              <LogOut className="h-4 w-4" />
-              Sign out
-            </button>
           </div>
         </div>
       </div>
@@ -116,16 +193,48 @@ export default function DashboardLayout({
         {/* Top bar */}
         <div className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
           <div className="flex h-16 items-center justify-between px-6">
-            <h1 className="text-2xl font-semibold text-gray-900">
-              Welcome back, {user?.firstName}!
-            </h1>
+            <div className="flex-1"></div>
             <div className="flex items-center gap-x-4">
-              <button className="p-2 text-gray-400 hover:text-gray-600">
-                <Bell className="h-5 w-5" />
-              </button>
-              <button className="p-2 text-gray-400 hover:text-gray-600">
-                <Settings className="h-5 w-5" />
-              </button>
+              {/* Notifications */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="p-2 text-gray-400 hover:text-gray-600 relative"
+                >
+                  <Bell className="h-5 w-5" />
+                  <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                    3
+                  </span>
+                </button>
+                
+                {/* Notifications Dropdown */}
+                {showNotifications && (
+                  <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg border border-gray-200 py-2 z-50">
+                    <div className="px-4 py-2 border-b border-gray-200">
+                      <h3 className="text-sm font-medium text-gray-900">Notifications</h3>
+                    </div>
+                    <div className="max-h-64 overflow-y-auto">
+                      <div className="px-4 py-3 hover:bg-gray-50">
+                        <p className="text-sm text-gray-900">New challenge available</p>
+                        <p className="text-xs text-gray-500">2 minutes ago</p>
+                      </div>
+                      <div className="px-4 py-3 hover:bg-gray-50">
+                        <p className="text-sm text-gray-900">Your challenge was approved</p>
+                        <p className="text-xs text-gray-500">1 hour ago</p>
+                      </div>
+                      <div className="px-4 py-3 hover:bg-gray-50">
+                        <p className="text-sm text-gray-900">Welcome to Umurava!</p>
+                        <p className="text-xs text-gray-500">1 day ago</p>
+                      </div>
+                    </div>
+                    <div className="px-4 py-2 border-t border-gray-200">
+                      <button className="text-sm text-blue-light hover:text-blue-dark">
+                        View all notifications
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -135,6 +244,27 @@ export default function DashboardLayout({
           {children}
         </main>
       </div>
+
+      {/* Click outside to close dropdowns */}
+      {(showProfileMenu || showNotifications) && (
+        <div
+          className="fixed inset-0 z-30"
+          onClick={() => {
+            setShowProfileMenu(false);
+            setShowNotifications(false);
+          }}
+        />
+      )}
+
+      {/* Modals */}
+      <ProfileModal 
+        isOpen={showProfileModal} 
+        onClose={() => setShowProfileModal(false)} 
+      />
+      <ChangePasswordModal 
+        isOpen={showPasswordModal} 
+        onClose={() => setShowPasswordModal(false)} 
+      />
     </div>
   );
 }
