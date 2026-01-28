@@ -250,9 +250,9 @@ export default function SignupPage() {
                                 name="agree-terms"
                                 type="checkbox"
                                 required
-                                className="h-4 w-4 text-blue-light focus:ring-blue-light border-gray-300 rounded"
+                                className="h-4 w-4 text-blue-light focus:ring-blue-light border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                             />
-                            <label htmlFor="agree-terms" className="ml-2 block text-sm text-gray-900">
+                            <label htmlFor="agree-terms" className="ml-2 block text-sm text-gray-900 dark:text-gray-100">
                                 I agree to the{' '}
                                 <Link href="/terms" className="text-blue-light hover:text-blue-dark">
                                     Terms of Service
@@ -282,17 +282,17 @@ export default function SignupPage() {
                     <div className="mt-6">
                         <div className="relative">
                             <div className="absolute inset-0 flex items-center">
-                                <div className="w-full border-t border-gray-300" />
+                                <div className="w-full border-t border-gray-300 dark:border-gray-600" />
                             </div>
                             <div className="relative flex justify-center text-sm">
-                                <span className="px-2 bg-white text-gray-500">Already have an account?</span>
+                                <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">Already have an account?</span>
                             </div>
                         </div>
 
                         <div className="mt-6">
                             <Link
                                 href="/login"
-                                className="w-full flex justify-center py-2 px-4 border border-blue-light text-sm font-medium rounded-md text-blue-light bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-light"
+                                className="w-full flex justify-center py-2 px-4 border border-blue-light text-sm font-medium rounded-md text-blue-light bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-light transition-colors"
                             >
                                 Sign in instead
                             </Link>

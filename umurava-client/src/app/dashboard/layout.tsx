@@ -253,7 +253,7 @@ export default function DashboardLayout({
         </div>
 
         {/* Page content */}
-        <main className="p-6">
+        <main className="p-6 min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
           {children}
         </main>
       </div>

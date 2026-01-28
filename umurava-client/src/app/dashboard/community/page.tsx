@@ -99,6 +99,66 @@ const CommunityPage = () => {
                 <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24"></div>
             </div>
 
+            {/* Community Features Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Feature Card 1 */}
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center gap-4 mb-4">
+                        <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-xl">
+                            <Trophy className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-gray-900 dark:text-gray-100">Skill Challenges</h3>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Test your abilities</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                        Participate in coding challenges and hackathons to improve your skills and win prizes.
+                    </p>
+                    <button className="w-full bg-blue-light text-white py-2 px-4 rounded-lg hover:bg-blue-dark transition-colors">
+                        View Challenges
+                    </button>
+                </div>
+
+                {/* Feature Card 2 */}
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center gap-4 mb-4">
+                        <div className="p-3 bg-green-100 dark:bg-green-900/30 rounded-xl">
+                            <Users className="h-6 w-6 text-green-600 dark:text-green-400" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-gray-900 dark:text-gray-100">Networking</h3>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Connect with peers</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                        Build your professional network by connecting with developers across Africa.
+                    </p>
+                    <button className="w-full bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors">
+                        Find Members
+                    </button>
+                </div>
+
+                {/* Feature Card 3 */}
+                <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center gap-4 mb-4">
+                        <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-xl">
+                            <Award className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-gray-900 dark:text-gray-100">Mentorship</h3>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Learn from experts</p>
+                        </div>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                        Get guidance from experienced professionals and accelerate your career growth.
+                    </p>
+                    <button className="w-full bg-purple-500 text-white py-2 px-4 rounded-lg hover:bg-purple-600 transition-colors">
+                        Find Mentors
+                    </button>
+                </div>
+            </div>
+
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {communityStats.map((stat, index) => (
@@ -197,6 +257,44 @@ const CommunityPage = () => {
                                                     <span className="font-medium">{activity.user}</span> {activity.action} {activity.target}
                                                 </p>
                                                 <p className="text-xs text-gray-500 dark:text-gray-400">{activity.time}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Leaderboard Section - Add this as a new section */}
+                    {activeTab === 'overview' && (
+                        <div className="mt-8">
+                            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 transition-colors duration-300">
+                                <div className="flex justify-between items-center mb-6">
+                                    <h4 className="font-semibold text-gray-900 dark:text-gray-100">Community Leaderboard</h4>
+                                    <button className="text-blue-light hover:text-blue-dark dark:text-blue-400 dark:hover:text-blue-300 font-medium text-sm">
+                                        View Full Leaderboard
+                                    </button>
+                                </div>
+                                <div className="space-y-4">
+                                    {topMembers.slice(0, 3).map((member, index) => (
+                                        <div key={index} className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-xl transition-colors duration-300">
+                                            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold text-sm">
+                                                {index + 1}
+                                            </div>
+                                            <div className="w-10 h-10 bg-blue-light text-white rounded-full flex items-center justify-center font-semibold">
+                                                {member.avatar}
+                                            </div>
+                                            <div className="flex-1">
+                                                <h5 className="font-medium text-gray-900 dark:text-gray-100">{member.name}</h5>
+                                                <p className="text-sm text-gray-600 dark:text-gray-400">{member.role}</p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="font-semibold text-gray-900 dark:text-gray-100">{member.challenges}</p>
+                                                <p className="text-xs text-gray-500 dark:text-gray-400">challenges</p>
+                                            </div>
+                                            <div className="flex items-center gap-1">
+                                                <Star className="h-4 w-4 text-yellow-500 fill-current" />
+                                                <span className="text-sm font-medium text-gray-900 dark:text-gray-100">{member.rating}</span>
                                             </div>
                                         </div>
                                     ))}

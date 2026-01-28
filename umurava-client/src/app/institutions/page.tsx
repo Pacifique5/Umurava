@@ -52,13 +52,13 @@ export default function Page() {
   return (
     <MainLayout>
       {/* First section */}
-      <div className="flex flex-col lg:flex-row items-center gap-[1rem] md:gap-[3rem] lg:gap-[6rem] mx-8 mt-[6rem] md:mt-[10rem]">
+      <div className="flex flex-col lg:flex-row items-center gap-[1rem] md:gap-[3rem] lg:gap-[6rem] mx-8 mt-[6rem] md:mt-[10rem] bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="flex flex-col gap-3 md:pl-[3rem]">
-          <h1 className="text-blue-light text-3xl md:text-[40px] font-bold md:font-extrabold">
+          <h1 className="text-blue-light dark:text-blue-400 text-3xl md:text-[40px] font-bold md:font-extrabold">
             Accelerate Your Students and Traineess Employability and Career
             Growth through Project-based Learning Solution
           </h1>
-          <p className="text-gray-800 text-[14px] sm:text-[16px]">
+          <p className="text-gray-800 dark:text-gray-300 text-[14px] sm:text-[16px]">
             We partner with Universities, Schools, and Trainining Institutions
             to build the work experience of their students and trainees through
             project based learning challenges and hackathons
@@ -79,10 +79,10 @@ export default function Page() {
       </div>
 
       {/* the second section */}
-      <div className="bg-[#F9FAFB] my-20 px-6 sm:px-10 lg:px-20 py-16 rounded-2xl">
+      <div className="bg-[#F9FAFB] dark:bg-gray-800 my-20 px-6 sm:px-10 lg:px-20 py-16 rounded-2xl transition-colors duration-300">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
               Key Offerings and Benefits
             </h1>
           </div>
@@ -120,19 +120,19 @@ export default function Page() {
                 className={`group relative overflow-hidden rounded-xl p-10 min-h-[400px] flex flex-col transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
                   index === 3 
                     ? 'bg-gradient-to-br from-blue-light to-blue-dark text-white md:col-span-2 lg:col-span-1' 
-                    : 'bg-white text-gray-900 shadow-md hover:shadow-lg border border-gray-100'
+                    : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-md hover:shadow-lg border border-gray-100 dark:border-gray-600'
                 }`}
               >
                 {/* Background decoration */}
                 <div className={`absolute top-0 right-0 w-28 h-28 rounded-full opacity-10 transform translate-x-12 -translate-y-12 ${
-                  index === 3 ? 'bg-white' : 'bg-blue-light'
+                  index === 3 ? 'bg-white' : 'bg-blue-light dark:bg-blue-400'
                 }`}></div>
                 
                 {/* Icon */}
                 <div className={`inline-flex items-center justify-center w-20 h-20 rounded-lg mb-10 text-4xl ${
                   index === 3 
                     ? 'bg-white/20' 
-                    : 'bg-blue-light/10'
+                    : 'bg-blue-light/10 dark:bg-blue-400/10'
                 }`}>
                   {feature.icon}
                 </div>
@@ -140,12 +140,12 @@ export default function Page() {
                 {/* Content */}
                 <div className="relative z-10 flex-grow flex flex-col justify-center">
                   <h3 className={`font-bold text-2xl mb-8 ${
-                    index === 3 ? 'text-white' : 'text-gray-900'
+                    index === 3 ? 'text-white' : 'text-gray-900 dark:text-gray-100'
                   }`}>
                     {feature.title}
                   </h3>
                   <p className={`text-lg leading-relaxed ${
-                    index === 3 ? 'text-white/90' : 'text-gray-600'
+                    index === 3 ? 'text-white/90' : 'text-gray-600 dark:text-gray-300'
                   }`}>
                     {feature.description}
                   </p>
@@ -155,7 +155,7 @@ export default function Page() {
                 <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
                   index === 3 
                     ? 'bg-gradient-to-br from-blue-dark/20 to-transparent' 
-                    : 'bg-gradient-to-br from-blue-light/5 to-transparent'
+                    : 'bg-gradient-to-br from-blue-light/5 dark:from-blue-400/5 to-transparent'
                 }`}></div>
               </div>
             ))}
@@ -164,8 +164,8 @@ export default function Page() {
       </div>
 
       {/* The partners section */}
-      <div className=" my-20 px-10 md:px-20 lg:px-26 relative z-[-1]">
-        <h1 className="text-3xl md:text-[40px] font-bold md:font-extrabold text-center my-10">
+      <div className="my-20 px-10 md:px-20 lg:px-26 relative z-[-1] bg-white dark:bg-gray-900 transition-colors duration-300">
+        <h1 className="text-3xl md:text-[40px] font-bold md:font-extrabold text-center my-10 text-gray-900 dark:text-gray-100">
           Join a few Educational Institutions using <br /> Skills Challenges by
           Umurava
         </h1>
@@ -244,9 +244,9 @@ export default function Page() {
       `}</style>
 
       {/* the other div */}
-      <div className="max-w-7xl mx-auto p-8 md:p-12 my-20 px-10 md:px-20 lg:px-26">
+      <div className="max-w-7xl mx-auto p-8 md:p-12 my-20 px-10 md:px-20 lg:px-26 bg-white dark:bg-gray-900 transition-colors duration-300">
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-[#1a2b4b] max-w-2xl mx-auto leading-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-[#1a2b4b] dark:text-gray-100 max-w-2xl mx-auto leading-tight">
             How Skills Challenges Program can Be Integrated into your Learning
             Institution
           </h2>
@@ -259,12 +259,12 @@ export default function Page() {
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-blue-light text-white flex items-center justify-center font-semibold">
                   {point.id}
                 </div>
-                <p className="text-gray-700 mt-1">{point.text}</p>
+                <p className="text-gray-700 dark:text-gray-300 mt-1">{point.text}</p>
               </div>
             ))}
           </div>
 
-          <div className="relative h-[400px] bg-blue-50 rounded-3xl overflow-hidden -z-10">
+          <div className="relative h-[400px] bg-blue-50 dark:bg-gray-700 rounded-3xl overflow-hidden -z-10 transition-colors duration-300">
             <Image
               src={SKill}
               alt="Skills platform interface"
