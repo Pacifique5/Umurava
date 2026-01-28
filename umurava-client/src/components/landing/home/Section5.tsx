@@ -79,7 +79,7 @@ export default function Section5() {
         {displayedCards.map((card, i) => (
           <div key={i} className="border border-gray-400 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 transition-colors duration-300">
             <div className="relative bg-blue-light rounded-md flex items-center justify-center h-[170px] m-3">
-              <Image src={card.logo} alt="logo" />
+              <Image src={card.logo} alt="logo" width={80} height={80} className="object-contain" />
               <div className="absolute top-1 right-1 bg-green-700 px-3 py-1 rounded-lg text-center text-[12px] text-white">
                 {card.status}
               </div>
