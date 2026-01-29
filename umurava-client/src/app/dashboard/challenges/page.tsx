@@ -239,9 +239,11 @@ const ChallengesPage = () => {
 
                                 {/* Action Button */}
                                 <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-                                    <button className="w-full bg-blue-light hover:bg-blue-dark text-white py-2 px-4 rounded-lg font-medium transition-colors">
-                                        View Challenge
-                                    </button>
+                                    <Link href={`/dashboard/challenges/${challenge.id}`}>
+                                        <button className="w-full bg-blue-light hover:bg-blue-dark text-white py-2 px-4 rounded-lg font-medium transition-colors">
+                                            View Challenge
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
