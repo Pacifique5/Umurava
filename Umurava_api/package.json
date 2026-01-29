@@ -5,8 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "npx prisma generate",
-    "postinstall": "npx prisma generate"
+    "build": "npx prisma generate"
   },
   "keywords": ["cybersecurity", "education", "vulnerability", "assessment"],
   "author": "CyberForge Team",
