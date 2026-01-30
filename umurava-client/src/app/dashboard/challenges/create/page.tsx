@@ -224,7 +224,8 @@ const CreateChallengePage = () => {
                                         title: "💻 Build a Modern Web Dashboard",
                                         description: "Create a responsive, feature-rich dashboard application using modern web technologies. This challenge focuses on frontend development, user experience design, and API integration.\n\n🎯 **Project Requirements:**\n• Responsive design that works on all devices\n• Interactive data visualizations\n• User authentication and authorization\n• Real-time data updates\n• Clean, intuitive user interface\n\n🛠️ **Technical Stack:**\n• Frontend: React, Vue, or Angular\n• Styling: Tailwind CSS or styled-components\n• Charts: Chart.js, D3.js, or similar\n• State Management: Redux, Vuex, or Context API\n• API Integration: REST or GraphQL\n\n📊 **Features to Implement:**\n• User dashboard with key metrics\n• Data filtering and search functionality\n• Export capabilities (PDF, CSV)\n• Dark/light theme toggle\n• Mobile-responsive navigation\n\nThis challenge will help you develop full-stack development skills and create a portfolio-worthy project.",
                                         difficulty: "medium",
-                                        duration: "14"
+                                        duration: "14",
+                                        targetUrl: ""
                                     })}
                                     className="text-xs bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-300 px-2 py-1 rounded hover:bg-green-200 dark:hover:bg-green-700 transition-colors"
                                 >
@@ -236,7 +237,8 @@ const CreateChallengePage = () => {
                                         title: "🤖 AI-Powered Data Analysis Challenge",
                                         description: "Dive into the world of artificial intelligence and machine learning by building a comprehensive data analysis solution. This challenge combines data science, machine learning, and practical AI implementation.\n\n🎯 **Challenge Objectives:**\n• Analyze complex datasets using AI/ML techniques\n• Build predictive models and algorithms\n• Create data visualizations and insights\n• Implement machine learning pipelines\n• Present findings in a clear, actionable format\n\n🔬 **Technical Requirements:**\n• Python with pandas, numpy, scikit-learn\n• Data visualization with matplotlib/seaborn\n• Machine learning model development\n• Statistical analysis and hypothesis testing\n• Model evaluation and optimization\n\n📈 **Deliverables:**\n• Jupyter notebook with complete analysis\n• Trained machine learning models\n• Interactive dashboard or web app\n• Technical report with findings\n• Code documentation and README\n\nThis challenge is perfect for aspiring data scientists and AI enthusiasts looking to build practical experience with real-world datasets.",
                                         difficulty: "hard",
-                                        duration: "21"
+                                        duration: "21",
+                                        targetUrl: ""
                                     })}
                                     className="text-xs bg-purple-100 dark:bg-purple-800 text-purple-700 dark:text-purple-300 px-2 py-1 rounded hover:bg-purple-200 dark:hover:bg-purple-700 transition-colors"
                                 >

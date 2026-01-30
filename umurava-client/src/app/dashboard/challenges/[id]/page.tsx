@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
+import { Challenge } from "@/types/challenge";
 import { 
   ArrowLeft, 
   Trophy, 
@@ -20,7 +21,6 @@ import {
   User
 } from "lucide-react";
 import { RootState, AppDispatch } from "@/store";
-import { Challenge } from "@/types/challenge";
 import { challengeService } from "@/services/challengeService";
 import VulnerabilityReportForm from "@/components/dashboard/VulnerabilityReportForm";
 import Link from "next/link";

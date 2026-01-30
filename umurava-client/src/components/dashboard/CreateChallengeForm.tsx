@@ -12,7 +12,9 @@ interface Challenge {
     description: string;
     difficulty: ChallengeDifficulty;
     duration: number;
+    targetUrl?: string;
     createdAt: string;
+    createdBy?: string;
 }
 
 interface CreateChallengeFormProps {

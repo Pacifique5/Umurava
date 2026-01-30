@@ -1,14 +1,7 @@
 "use client";
 
 import {ChallengeCard} from "@/components/dashboard/ChallengeCard";
-
-type Challenge = {
-    id: string;
-    title: string;
-    description: string;
-    moneyPrize: number;
-    deadline: string;
-};
+import { Challenge } from "@/types/challenge";
 
 interface RecentChallengesProps {
     challenges: Challenge[];

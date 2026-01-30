@@ -4,9 +4,10 @@ import { RootState } from "./index";
 // Declare the User interface here
 export interface User {
     id: string;
-    name: string;
+    firstName: string;
+    lastName: string;
     email: string;
-    avatar: string;
+    createdAt: string;
 }
 
 // Define the Dashboard Stats Type

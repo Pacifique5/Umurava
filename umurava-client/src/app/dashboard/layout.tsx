@@ -10,7 +10,7 @@ import {
   Users, 
   Settings, 
   LogOut,
-  User,
+  User as UserIcon,
   Bell,
   ChevronDown,
   Camera,
