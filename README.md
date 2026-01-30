@@ -1,11 +1,11 @@
 # CyberForge - Cybersecurity Education Platform
 
-[![Vercel Deployment](https://img.shields.io/github/deployments/Pacifique5/Cyber-Forge/production?label=Frontend&logo=vercel)](https://your-project.vercel.app)
+[![Vercel Deployment](https://img.shields.io/github/deployments/Pacifique5/Cyber-Forge/production?label=Frontend&logo=vercel)](https://cyberforge1.vercel.app)
 [![Render Deployment](https://img.shields.io/badge/Backend-Live-brightgreen?logo=render)](https://cyber-forge.onrender.com)
 
 ## 🚀 Live Deployments
 
-- **Frontend**: [https://your-project.vercel.app](https://your-project.vercel.app)
+- **Frontend**: [https://cyberforge1.vercel.app](https://cyberforge1.vercel.app)
 - **Backend API**: [https://cyber-forge.onrender.com](https://cyber-forge.onrender.com)
 - **API Health**: [https://cyber-forge.onrender.com/api/health](https://cyber-forge.onrender.com/api/health)
 
@@ -26,7 +26,7 @@
 
 ## 🔗 Quick Links
 
-- [Live Application](https://your-project.vercel.app)
+- [Live Application](https://cyberforge1.vercel.app)
 - [API Documentation](https://cyber-forge.onrender.com/api/health)
 - [Frontend Source](./umurava-client)
 - [Backend Source](./Umurava_api)
